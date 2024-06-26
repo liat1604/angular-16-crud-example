@@ -9,41 +9,34 @@
 </head>
 <body>
   <app-root></app-root>
-  <div id="tweet-container"></div>
-
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   
-  <script>
-    // Variables for the tweet URL and ID
-    const tweetUrl = "https://twitter.com/Mbpotch/status/662468757433024513?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E662468757433024513%7Ctwgr%5Ef660a407ed09c2e6f0cb37341e5e129517e72efe%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fpublish.twitter.com%2F%3Furl%3Dhttps%3A%2F%2Ftwitter.com%2FMbpotch%2Fstatus%2F662468757433024513";
+  <input type="text" id="twitterHandle" placeholder="Enter Twitter handle">
+    <button onclick="loadTwitterTimeline()">Load Tweets</button>
 
-    // Function to create the Twitter embed code
-    function createTweetEmbed(tweetUrl) {
-        return `
-            <blockquote class="twitter-tweet">
-                <a href="${tweetUrl}"></a>
-            </blockquote>
-        `;
-    }
+    <div id="twitterTimeline"></div>
 
-    // Get the container where the tweet will be embedded
-    const tweetContainer = document.getElementById('tweet-container');
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script>
+        function loadTwitterTimeline() {
+            var handle = document.getElementById('twitterHandle').value;
+            var twitterTimelineDiv = document.getElementById('twitterTimeline');
 
-    // Insert the tweet embed code into the container
-    tweetContainer.innerHTML = createTweetEmbed(tweetUrl);
+            // Clear previous content
+            twitterTimelineDiv.innerHTML = '';
 
-    // Load the Twitter widgets script
-    if (window.twttr) {
-        window.twttr.widgets.load();
-    } else {
-        const script = document.createElement('script');
-        script.src = "https://platform.twitter.com/widgets.js";
-        script.async = true;
-        script.charset = "utf-8";
-        document.head.appendChild(script);
-    }
-</script>
+            // Create a new anchor element for the Twitter timeline
+            var twitterAnchor = document.createElement('a');
+            twitterAnchor.className = 'twitter-timeline';
+            twitterAnchor.href = 'https://twitter.com/' + handle + '?ref_src=twsrc%5Etfw';
+            twitterAnchor.textContent = 'Tweets by ' + handle;
 
+            // Append the anchor element to the div
+            twitterTimelineDiv.appendChild(twitterAnchor);
+
+            // Reload the Twitter widgets script to apply the new timeline
+            twttr.widgets.load(twitterTimelineDiv);
+        }
+    </script>
 
 </body>
 </html>
