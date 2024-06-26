@@ -2,41 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Angular16Crud</title>
+  <title>Twitter Feed!!!</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <app-root></app-root>
-  
-  <input type="text" id="twitterHandle" placeholder="Enter Twitter handle">
+  <div id="container">
+    <input type="text" id="twitterHandle" placeholder="Enter Twitter handle">
     <button onclick="loadTwitterTimeline()">Load Tweets</button>
 
     <div id="twitterTimeline"></div>
+  </div>
 
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <script>
-        function loadTwitterTimeline() {
-            var handle = document.getElementById('twitterHandle').value;
-            var twitterTimelineDiv = document.getElementById('twitterTimeline');
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script>
+      function loadTwitterTimeline() {
+          var handle = document.getElementById('twitterHandle').value;
+          var twitterTimelineDiv = document.getElementById('twitterTimeline');
 
-            // Clear previous content
-            twitterTimelineDiv.innerHTML = '';
+          // Clear previous content
+          twitterTimelineDiv.innerHTML = '';
 
-            // Create a new anchor element for the Twitter timeline
-            var twitterAnchor = document.createElement('a');
-            twitterAnchor.className = 'twitter-timeline';
-            twitterAnchor.href = 'https://twitter.com/' + handle;
-            twitterAnchor.textContent = 'Tweets by ' + handle;
+          // Create a new anchor element for the Twitter timeline
+          var twitterAnchor = document.createElement('a');
+          twitterAnchor.className = 'twitter-timeline';
+          twitterAnchor.href = 'https://twitter.com/' + handle;
+          twitterAnchor.textContent = 'Tweets by ' + handle;
+          twitterAnchor.setAttribute('data-width', '800'); // Set the desired width here
+          twitterAnchor.setAttribute('data-height', '600'); // Optional: set a desired height
 
-            // Append the anchor element to the div
-            twitterTimelineDiv.appendChild(twitterAnchor);
+          // Append the anchor element to the div
+          twitterTimelineDiv.appendChild(twitterAnchor);
 
-            // Reload the Twitter widgets script to apply the new timeline
-            twttr.widgets.load(twitterTimelineDiv);
-        }
-    </script>
-
+          // Reload the Twitter widgets script to apply the new timeline
+          twttr.widgets.load(twitterTimelineDiv);
+      }
+  </script>
 </body>
 </html>
