@@ -9,6 +9,41 @@
 </head>
 <body>
   <app-root></app-root>
-  <blockquote class="twitter-tweet"><p lang="en" dir="ltr">At dawn from the gateway to Mars, the launch of Starship’s second flight test <a href="https://t.co/ffKnsVKwG4">pic.twitter.com/ffKnsVKwG4</a></p>&mdash; SpaceX (@SpaceX) <a href="https://twitter.com/SpaceX/status/1732824684683784516?ref_src=twsrc%5Etfw">December 7, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+  <div id="tweet-container"></div>
+
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+  <script>
+    // Variables for the tweet URL and ID
+    const tweetUrl = "https://twitter.com/Mbpotch/status/662468757433024513?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E662468757433024513%7Ctwgr%5Ef660a407ed09c2e6f0cb37341e5e129517e72efe%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fpublish.twitter.com%2F%3Furl%3Dhttps%3A%2F%2Ftwitter.com%2FMbpotch%2Fstatus%2F662468757433024513";
+
+    // Function to create the Twitter embed code
+    function createTweetEmbed(tweetUrl) {
+        return `
+            <blockquote class="twitter-tweet">
+                <a href="${tweetUrl}"></a>
+            </blockquote>
+        `;
+    }
+
+    // Get the container where the tweet will be embedded
+    const tweetContainer = document.getElementById('tweet-container');
+
+    // Insert the tweet embed code into the container
+    tweetContainer.innerHTML = createTweetEmbed(tweetUrl);
+
+    // Load the Twitter widgets script
+    if (window.twttr) {
+        window.twttr.widgets.load();
+    } else {
+        const script = document.createElement('script');
+        script.src = "https://platform.twitter.com/widgets.js";
+        script.async = true;
+        script.charset = "utf-8";
+        document.head.appendChild(script);
+    }
+</script>
+
+
 </body>
 </html>
